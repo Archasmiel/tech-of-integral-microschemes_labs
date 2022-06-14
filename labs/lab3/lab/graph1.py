@@ -15,16 +15,17 @@ def read_data(filename: str):
         if i == data[0]:
             res.append(i)
         if i != data[0] and i != data[-1]:
-            x.append(float(i[0]))
-            y.append(float(i[1]))
+            x.append(float(i[1]))
+            y.append(370 - float(i[0]))
+
         if i == data[-1]:
-            res.append(y)
             res.append(x)
+            res.append(y)
             res.append(i)
 
     minim, maxim = min(x), max(x)
 
-    return [res[1], res[2], [res[0][0]] * len(res[1]), [res[0][1]] * len(res[2])], data[-1], minim, maxim
+    return [res[1], res[2], [res[0][1]] * len(res[2]), [res[0][0]] * len(res[1])], data[-1], minim, maxim
 
 
 def plot_graph(filename: str):

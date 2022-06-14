@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 handler = [[], []]
 
 
+def clear_handler():
+    handler.clear()
+    handler.append([])
+    handler.append([])
+
+
 def get_graph(plot: plt, name: str,
               x_label: str, y_label: str,
               data: list,
@@ -16,13 +22,14 @@ def get_graph(plot: plt, name: str,
 
     if settings[5]:
         plot.figure()
+        clear_handler()
 
     plot.xlabel(x_label)
     plot.ylabel(y_label)
 
     if settings[4]:
         handle = plot.errorbar(data[0], data[1],
-                               xerr=data[2], yerr=data[3],
+                               xerr=[i/2 for i in data[2]], yerr=[i/2 for i in data[3]],
                                capsize=settings[0], elinewidth=settings[1], ls='none')
         handler[0].append(handle)
         handler[1].append(name)

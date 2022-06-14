@@ -17,17 +17,15 @@ def read_data(filename: str):
         if i != data[0] and i != data[-1]:
             x.append(float(i[1]))
             y.append(float(i[0]))
+
         if i == data[-1]:
             res.append(x)
-            res.append([1/i/i for i in y])
+            res.append(y)
             res.append(i)
-
-    plt.scatter(0, 0)
-    plt.scatter(-16, 0)
 
     minim, maxim = min(x), max(x)
 
-    return [res[1], res[2], [0] * len(res[2]), [0] * len(res[1])], data[-1], minim, maxim
+    return [res[1], res[2], [res[0][1]] * len(res[2]), [res[0][0]] * len(res[1])], data[-1], minim, maxim
 
 
 def plot_graph(filename: str):
@@ -37,7 +35,7 @@ def plot_graph(filename: str):
     gio.get_graph(plot=plt,
                   name=filename.split('.')[0].split('data')[1],
                   x_label=f'Uz, {meas[1]}',
-                  y_label=f'C1^-2, {meas[0]}',
+                  y_label=f'C1, {meas[0]}',
                   data=data,
                   settings=plot_settings)
 
